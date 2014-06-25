@@ -24,8 +24,6 @@ RUN \
 
 # zookeeper
 EXPOSE 2181
-# Hadoop namenode Web UI
-EXPOSE 50070
 # HBase Master API port
 EXPOSE 60000
 # HBase Master Web UI
