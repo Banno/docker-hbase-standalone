@@ -1,3 +1,4 @@
+## -*- docker-image-name: "banno/hbase-standalone" -*-
 FROM ubuntu:12.04
 MAINTAINER Nic Grayson nic.grayson@banno.com
 
@@ -15,12 +16,11 @@ RUN \
   apt-get install -y oracle-java7-installer
 
 # install hbase master
-RUN \
-  echo "deb [arch=amd64] http://archive.cloudera.com/cdh4/ubuntu/precise/amd64/cdh precise-cdh4 contrib" >> /etc/apt/sources.list.d/cloudera.list && \
-  echo "deb-src http://archive.cloudera.com/cdh4/ubuntu/precise/amd64/cdh precise-cdh4 contrib" >> /etc/apt/sources.list.d/cloudera.list && \
-  curl -s http://archive.cloudera.com/cdh4/ubuntu/precise/amd64/cdh/archive.key | apt-key add - && \
-  apt-get update && \
-  apt-get install -y hbase-master
+ADD hbase-0.94.15-cdh4.7.0.tar.gz /opt/hbase
+ADD hbase-site.xml /etc/hbase/conf/hbase-site.xml
+
+# need this for hbase to run
+ENV JAVA_HOME /usr
 
 # zookeeper
 EXPOSE 2181
@@ -33,4 +33,4 @@ EXPOSE 60020
 # HBase Regionserver web UI
 EXPOSE 60030
 
-CMD hbase master start
+CMD /opt/hbase/hbase-0.94.15-cdh4.7.0/bin/hbase master start
