@@ -16,7 +16,9 @@ RUN \
   apt-get install -y oracle-java7-installer
 
 # install hbase master
-ADD hbase-0.94.15-cdh4.7.0.tar.gz /opt/hbase
+RUN mkdir /opt/hbase
+RUN wget -q https://github.com/Banno/docker-hbase-standalone/raw/master/hbase-0.94.15-cdh4.7.0.tar.gz -O /opt/hbase/hbase-0.94.15-cdh4.7.0.tar.gz
+RUN tar xfvz /opt/hbase/hbase-0.94.15-cdh4.7.0.tar.gz
 ADD hbase-site.xml /etc/hbase/conf/hbase-site.xml
 
 # need this for hbase to run
