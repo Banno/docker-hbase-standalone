@@ -1,25 +1,15 @@
-## -*- docker-image-name: "banno/hbase-standalone" -*-
-FROM ubuntu:12.04
-MAINTAINER Nic Grayson nic.grayson@banno.com
+FROM ubuntu:14.04
 
-# install add-apt-repository
 RUN \
   apt-get update && \
-  apt-get install -y python-software-properties curl
+  apt-get install -y openjdk-6-jre && \
+  apt-get clean
 
-# install java
-RUN \
-  echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
-  echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections && \
-  add-apt-repository -y ppa:webupd8team/java && \
-  apt-get update && \
-  apt-get install -y oracle-java6-installer
-
-# install hbase master
-RUN mkdir /opt/hbase
-RUN wget -q https://github.com/Banno/docker-hbase-standalone/raw/CDH-3.5/hbase-0.90.0.tar.gz -O /opt/hbase/hbase-0.90.0.tar.gz
-RUN cd /opt/hbase && tar xfvz hbase-0.90.0.tar.gz
-ADD hbase-site.xml /etc/hbase/conf/hbase-site.xml
+RUN mkdir -p /opt/hbase
+COPY hbase-0.90.0.tar.gz /opt/hbase/hbase-0.90.0.tar.gz
+WORKDIR /opt/hbase
+RUN tar xfvz hbase-0.90.0.tar.gz
+COPY hbase-site.xml /etc/hbase/conf/hbase-site.xml
 
 # need this for hbase to run
 ENV JAVA_HOME /usr
