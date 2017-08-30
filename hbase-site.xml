@@ -11,4 +11,12 @@
     <name>hbase.zookeeper.quorum</name>
     <value>dev.banno.com</value>
   </property>
+  <property>
+     <name>hbase.zookeeper.property.maxClientCnxns</name>
+     <value>0</value>
+  </property>
+  <property>
+    <name>zookeeper.session.timeout</name>
+    <value>1200000</value>
+  </property>
 </configuration>
