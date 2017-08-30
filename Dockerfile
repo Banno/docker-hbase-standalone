@@ -6,9 +6,7 @@ RUN \
   apt-get clean
 
 RUN mkdir -p /opt/hbase
-COPY hbase-0.90.0.tar.gz /opt/hbase/hbase-0.90.0.tar.gz
-WORKDIR /opt/hbase
-RUN tar xfvz hbase-0.90.0.tar.gz
+ADD hbase-0.90.0.tar.gz /opt/hbase/
 COPY hbase-site.xml /etc/hbase/conf/hbase-site.xml
 
 # need this for hbase to run
