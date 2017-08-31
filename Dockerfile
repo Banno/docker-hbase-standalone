@@ -6,7 +6,7 @@ RUN \
   apt-get clean
 
 RUN mkdir -p /opt/hbase
-ADD hbase-0.90.0.tar.gz /opt/hbase/
+ADD hbase-0.90.6-cdh3u6.tar.gz /opt/hbase/
 COPY hbase-site.xml /etc/hbase/conf/hbase-site.xml
 
 # need this for hbase to run
@@ -23,4 +23,4 @@ EXPOSE 60020
 # HBase Regionserver web UI
 EXPOSE 60030
 
-CMD /opt/hbase/hbase-0.90.0/bin/hbase master start
+CMD /opt/hbase/hbase-0.90.6-cdh3u6/bin/hbase master start
