@@ -8,6 +8,7 @@ RUN \
 RUN mkdir -p /opt/hbase
 ADD hbase-0.90.6-cdh3u6.tar.gz /opt/hbase/
 COPY hbase-site.xml /opt/hbase/hbase-0.90.6-cdh3u6/conf/hbase-site.xml
+COPY hbase-0.90.6-cdh3u6.jar /opt/hbase/hbase-0.90.6-cdh3u6/hbase-0.90.6-cdh3u6.jar
 
 # need this for hbase to run
 ENV JAVA_HOME /usr
